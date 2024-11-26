@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TV ITI-TV</title>
+    <link rel="stylesheet" href="HTML/index.css">
+    <link rel="icon" href="IMG/Immagini%20Sito/icona2.jpg" type="image/x-icon">
+    <script src="JS/jquery.js"></script>
+    <script src="JS/index.js"></script>
+</head>
+
+<body>
+    <div id="offline-message" style="
+        display: none;
+        width: 1920px;
+        height: 1080px;
+        position: absolute;
+        background-color: #004996;
+        top: 0;
+        left: 0;
+        z-index: 999;
+    ">
+        <div id="imgManutenzione1"></div>
+        <div id="imgManutenzione2"></div>
+        <div id="testoManutenzione">IN MANUTENZIONE</div>
+        <div id="boxDataOraManutenzione"></div>
+        <div id="OraManutenzione"></div>
+        <div id="DataManutenzione"></div>
+        <div id="parola1Manutenzione">Inizio</div>
+        <div id="parola2Manutenzione">Manutenzione</div>
+    </div>
+    <div id="header">
+        <div id="boxHeader">
+            <img src="IMG/Immagini Sito/Classico/LogoITI.png" alt="LogoITI" id="logoITI">
+            <img src="IMG/Immagini Sito/Classico/LogoITITV.png" alt="LogoITITV" id="logoITITV">
+            <h1 id="TestoTitolo"></h1>
+        </div>
+    </div>
+    <div id="main"></div>
+    <div id="footer"></div>
+    <script>
+
+        $('#footer').load('HTML/footer.html');
+
+    </script>
+</body>
+
+</html>
