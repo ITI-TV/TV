@@ -4,23 +4,16 @@ const PERIODO_NATALE_FINE = 6; // Fine periodo di Natale (6 gennaio)
 
 //Saluti e dichiarazione della versione della TV e crediti
 console.log('Benvenuto nella TV del progetto ITI-TV dell`IIS "N.Copernico A.Carpeggiani"');
-console.log('Versione b2.0.30');
-console.log('Crediti: ');
-console.log('. Classe 5X Informatica 2024/25 (Project Manager: Gabriele Bovina e Samuele Marinelli)');
-console.log('. Classe 4X Informatica 2023/24 (Project Manager: Gabriele Bovina e Samuele Marinelli)');
-console.log('. Classe 3X Informatica 2022/23 (Project Manager: Gabriele Bovina e Samuele Marinelli)');
-console.log('. Classe 5X Informatica 2020/21 (Project Manager: Luca Corticelli e Diego Bonati)');
-console.log('Ringraziamenti per il supporto e la collaborazione per gli eventi giornalieri: ');
 
 // Variabili per il controllo dello stato del server
 //prendo il link dinamicamente in base all'url presnete sulla barra del browser
-const serverUrl = window.location.origin + '/TVITITV/index.html';
+const serverUrl = window.location.origin + '/TV/index.html';
 let isOffline = false;
 
 // Funzione che parte al caricamento del sito e controlla con la funzione lo stato del server ogni 2 secondi
 function checkServer2Seconds() {
     checkServer();
-    setTimeout(checkServer2Seconds, 1000);
+    setTimeout(checkServer2Seconds, 30000);
 }
 
 //Funzione di controllo server
@@ -87,6 +80,11 @@ function loadEventiGiornalieri(periodo) {
 function loadComponentiAggiuntivi(periodo) {
     checkServer();
     $('#main').load(`HTML/${periodo}/Componenti%20Aggiuntivi/main.html`);
+}
+
+function loadInformazioniGenerali(periodo) {
+    checkServer();
+    $('#main').load(`HTML/${periodo}/Informazioni%20Generali/main.html`);
 }
 
 // Funzione per determinare il periodo festivo corrente
@@ -354,14 +352,16 @@ function starter() {
                 }
             }
             console.log('Indice: ' + indice);
-            console.log('Programmazione: ' + programmazione[indice]['Numero_Comunicazioni']);
-            console.log('Programmazione: ' + programmazione[indice]['Numero_Eventi_Giornalieri']);
-            console.log('Programmazione: ' + programmazione[indice]['Numero_Componenti_Aggiuntivi']);
+            console.log('Programmazione Comunicazioni: ' + programmazione[indice]['Numero_Comunicazioni']);
+            console.log('Programmazione Eventi Giornalieri: ' + programmazione[indice]['Numero_Eventi_Giornalieri']);
+            console.log('Programmazione Componenti Aggiuntivi: ' + programmazione[indice]['Numero_Componenti_Aggiuntivi']);
+            console.log('Programmazione Informazioni Generali: ' + programmazione[indice]['Numero_Informazioni_Generali']);
             try {
                 //in base all'indice trovato mi salvo, numero comunicazioni, numero eventi giornalieri, numero componenti aggiuntivi e tempo totale in secondi
                 let NumeroComunicazioni = programmazione[indice]['Numero_Comunicazioni'];
                 let NumeroEventiGiornalieri = programmazione[indice]['Numero_Eventi_Giornalieri'];
                 let NumeroComponentiAggiuntivi = programmazione[indice]['Numero_Componenti_Aggiuntivi'];
+                let NumeroInformazioniGenerali = programmazione[indice]['Numero_Informazioni_Generali'];
                 //calcolo i secondi totali di visualizzazione prendendo da Ora inizo e Ora fine
                 let oraInizio = programmazione[indice]['Ora_Inizio'];
                 let oraFine = programmazione[indice]['Ora_Fine'];
@@ -374,7 +374,7 @@ function starter() {
                 }
                 let TempoTotaleSecondi = oraFineSecondi - oraInizioSecondi;
                 let periodo = getPeriodoFestivo();
-                loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAggiuntivi, TempoTotaleSecondi, oraInizio, oraFine, periodo);
+                loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAggiuntivi, NumeroInformazioniGenerali, TempoTotaleSecondi, oraInizio, oraFine, periodo);
             } catch (e) {
                 console.error('Errore nella richiesta:', e);
                 window.location.reload();
@@ -400,37 +400,98 @@ function getOrario() {
     return ora + ':' + minuti;
 }
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-function loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAggiuntivi, TempoTotaleDisponibile, oraInizio, oraFine, periodo) {
+function loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAggiuntivi, NumeroInformazioniGenerali, TempoTotaleDisponibile, oraInizio, oraFine, periodo) {
     let programmazione = [];
     document.getElementById("main").style.display = "block";
     document.getElementById("footer").style.display = "block";
     document.getElementById("header").style.display = "block";
-    // Aggiungi i numeri con il conteggio specificato
+
+    // Riempi l'array programmazione in modo equilibrato
+    console.log("Dimensione massima array: " + Math.floor(TempoTotaleDisponibile / 60));
+
+    // Per ogni comunicazione inserisco una 'C' nell'array
     for (let i = 0; i < NumeroComunicazioni; i++) {
-        programmazione.push('C'); // Comunicazioni
+        let index = Math.floor((Math.floor(TempoTotaleDisponibile / 60) / NumeroComunicazioni) * i);
+        if (programmazione[index] === undefined) {
+            programmazione[index] = 'C';
+        } else {
+            // Cerco la prima posizione libera proseguendo per l'array ma non supero la dimensione massima
+            for (let j = index; j < Math.floor(TempoTotaleDisponibile / 60); j++) {
+                if (programmazione[j] === undefined) {
+                    programmazione[j] = 'C';
+                    break;
+                } else if (j === Math.floor(TempoTotaleDisponibile / 60) - 1) {
+                    j = -1; // Torna all'inizio dell'array
+                }
+            }
+        }
     }
+
+    // Per ogni evento giornaliero inserisco una 'E' nell'array
     for (let i = 0; i < NumeroEventiGiornalieri; i++) {
-        programmazione.push('E'); // Eventi_Giornalieri
+        let index = Math.floor((Math.floor(TempoTotaleDisponibile / 60) / NumeroEventiGiornalieri) * i);
+        if (programmazione[index] === undefined) {
+            programmazione[index] = 'E';
+        } else {
+            // Cerco la prima posizione libera proseguendo per l'array ma non supero la dimensione massima
+            for (let j = index; j < Math.floor(TempoTotaleDisponibile / 60); j++) {
+                if (programmazione[j] === undefined) {
+                    programmazione[j] = 'E';
+                    break;
+                } else if (j === Math.floor(TempoTotaleDisponibile / 60) - 1) {
+                    j = -1; // Torna all'inizio dell'array
+                }
+            }
+        }
     }
+
+    // Per ogni componente aggiuntivo inserisco una 'A' nell'array
     for (let i = 0; i < NumeroComponentiAggiuntivi; i++) {
-        programmazione.push('A'); // Componenti_Aggiuntivi
+        let index = Math.floor((Math.floor(TempoTotaleDisponibile / 60) / NumeroComponentiAggiuntivi) * i);
+        if (programmazione[index] === undefined) {
+            programmazione[index] = 'A';
+        } else {
+            // Cerco la prima posizione libera proseguendo per l'array ma non supero la dimensione massima
+            for (let j = index; j < Math.floor(TempoTotaleDisponibile / 60); j++) {
+                if (programmazione[j] === undefined) {
+                    programmazione[j] = 'A';
+                    break;
+                } else if (j === Math.floor(TempoTotaleDisponibile / 60) - 1) {
+                    j = -1; // Torna all'inizio dell'array
+                }
+            }
+        }
     }
-    // Mescola l'array per distribuire equamente i numeri
-    programmazione = shuffleArray(programmazione);
 
-    let TempoDisponibilePerOgniPagina = (NumeroComponentiAggiuntivi + NumeroComunicazioni + NumeroEventiGiornalieri) / programmazione.length * 60;
+    // Per ogni informazione generale inserisco una 'I' nell'array
+    for (let i = 0; i < NumeroInformazioniGenerali; i++) {
+        let index = Math.floor((Math.floor(TempoTotaleDisponibile / 60) / NumeroInformazioniGenerali) * i);
+        if (programmazione[index] === undefined) {
+            programmazione[index] = 'I';
+        } else {
+            // Cerco la prima posizione libera proseguendo per l'array ma non supero la dimensione massima
+            for (let j = index; j < Math.floor(TempoTotaleDisponibile / 60); j++) {
+                if (programmazione[j] === undefined) {
+                    programmazione[j] = 'I';
+                    break;
+                } else if (j === Math.floor(TempoTotaleDisponibile / 60) - 1) {
+                    j = -1; // Torna all'inizio dell'array
+                }
+            }
+        }
+    }
 
-    let currentIndex = 0;
-    let TestoTitolo = document.getElementById("TestoTitolo");
+    console.log(programmazione);
 
+    //calcolo il tempo disponibile per ogni pagina in secondi
+    let TempoDisponibilePerOgniPagina = Math.floor(TempoTotaleDisponibile / (NumeroComunicazioni + NumeroEventiGiornalieri + NumeroComponentiAggiuntivi + NumeroInformazioniGenerali));
+
+    // indice corrente che dice, in base alla programmazione, quale pagina devo caricare recuperando il punto in cui dovrebbe essere caricata in base all'orario
+    let currentIndex = Math.floor(getOrario().split(':')[0] * 3600 + getOrario().split(':')[1] * 60) / TempoDisponibilePerOgniPagina;
+
+    let oraCorrente = 0;
+
+    //funzione ricorsiva che si occupa di caricare le pagine in base alla programmazione
     function processNext() {
         //calcolo il tempo rimanente in secondi considerando anche il minuto dell'ora finele
         let TempoRimanente = (oraFine.split(':')[0] * 3600 + oraFine.split(':')[1] * 60 - getOrario().split(':')[0] * 3600 - getOrario().split(':')[1] * 60) + 60;
@@ -443,7 +504,7 @@ function loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAg
             console.log('Numero Comunicazioni: ' + NumeroComunicazioni);
             console.log('Numero Eventi Giornalieri: ' + NumeroEventiGiornalieri);
             console.log('Numero Componenti Aggiuntivi: ' + NumeroComponentiAggiuntivi);
-            if (NumeroComponentiAggiuntivi === 0 && NumeroComunicazioni === 0 && NumeroEventiGiornalieri === 0) {
+            if (NumeroComponentiAggiuntivi === 0 && NumeroComunicazioni === 0 && NumeroEventiGiornalieri === 0 && NumeroInformazioniGenerali === 0) {
                 // Mostra una schermata nera
                 $('#main').css('display', 'none');
                 $('#footer').css('display', 'none');
@@ -481,93 +542,17 @@ function loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAg
                     checkServer();
                     TestoTitolo.innerHTML = 'COMPONENTI AGGIUNTIVI';
                     loadComponentiAggiuntivi(periodo);
-                }
-                currentIndex++;
-                setTimeout(processNext, TempoDisponibilePerOgniPagina * 1000);
-            }
-        } else {
-            starter();
-        }
-        /*
-        //calcolo il tempo rimanente in secondi
-        let data = new Date();
-        let ora = data.getHours();
-        let minuti = data.getMinutes();
-        let secondi = data.getSeconds();
-        let oraCorrente = ora * 3600 + minuti * 60 + secondi;
-        let oraInizioSplit = oraInizio.split(':');
-        let oraInizioSecondi = oraInizioSplit[0] * 3600 + oraInizioSplit[1] * 60;
-        let oraFineSplit = oraFine.split(':');
-        let oraFineSecondi = oraFineSplit[0] * 3600 + oraFineSplit[1] * 60;
-        if (oraFineSecondi < oraInizioSecondi) {
-            oraFineSecondi += 86400;
-        }
-        let TempoRimanente = oraFineSecondi - oraCorrente;
-        //controllo che non sia passato il tempo totale disponibile
-        if (TempoRimanente > 0) {
-            console.log('Tempo rimanente: ' + TempoRimanente);
-            console.log('Tempo disponibile per ogni pagina: ' + TempoDisponibilePerOgniPagina);
-            console.log('Pagina corrente: ' + currentIndex);
-            console.log('Programmazione: ' + programmazione);
-            console.log('Numero Comunicazioni: ' + NumeroComunicazioni);
-            console.log('Numero Eventi Giornalieri: ' + NumeroEventiGiornalieri);
-            console.log('Numero Componenti Aggiuntivi: ' + NumeroComponentiAggiuntivi);
-            if (NumeroComponentiAggiuntivi === "0" && NumeroComunicazioni === "0" && NumeroEventiGiornalieri === "0" || NumeroComunicazioni === 0 && NumeroEventiGiornalieri === 0 && NumeroComponentiAggiuntivi === 0) {
-                // Mostra una schermata nera
-                $('#main').css('display', 'none');
-                $('#footer').css('display', 'none');
-                $('#header').css('display', 'none');
-                $('body').css('background-color', 'black');
-
-                setTimeout(() => {
+                } else if (pagina === 'I') {
                     checkServer();
-                    location.reload();
-                }, TempoRimanente * 1000);
-
-
-            } else {
-                console.log(periodo);
-                if (periodo === 'Natalizia') {
-                    setHeaderNat();
-                    setFooterNat();
-                } else if (periodo === 'Pasqua') {
-                    setHeaderPasqua();
-                    setFooterPasqua();
-                } else if (periodo === 'Halloween') {
-                    setHeaderHalloween();
-                    setFooterHalloween();
-                }
-                let pagina = programmazione[currentIndex];
-                if (pagina === 'C') {
-                    checkServer()
-                    TestoTitolo.innerHTML = 'COMUNICAZIONI GIORNALIERE';
-                    loadComunicazioni(periodo);
-                } else if (pagina === 'E') {
-                    checkServer()
-                    TestoTitolo.innerHTML = 'RICORRENZA DEL GIORNO';
-                    loadEventiGiornalieri(periodo);
-                } else if (pagina === 'A') {
-                    checkServer()
-                    TestoTitolo.innerHTML = 'COMPONENTI AGGIUNTIVI';
-                    loadComponentiAggiuntivi(periodo);
+                    TestoTitolo.innerHTML = 'INFORMAZIONI GENERALI';
+                    loadInformazioniGenerali(periodo);
                 }
                 currentIndex++;
                 setTimeout(processNext, TempoDisponibilePerOgniPagina * 1000);
             }
-        } else if (oraCorrente < oraInizioSecondi) {
-            $('#main').css('display', 'none');
-            $('#footer').css('display', 'none');
-            $('#header').css('display', 'none');
-            $('body').css('background-color', 'black');
-
-            setTimeout(() => {
-                checkServer();
-                location.reload();
-            }, TempoRimanente * 1000);
         } else {
             starter();
         }
-            */
     }
     processNext();
 }

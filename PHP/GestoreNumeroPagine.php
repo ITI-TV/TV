@@ -2,10 +2,12 @@
 $NumeroComunicazioni = 0;
 $NumeroComponentiAggiuntivi = 0;
 $NumeroEventiGiornalieri = 0;
+$NumeroInformazioniAggiuntive = 0;
 
 $PagineComunicazioni = 0;
 $PagineComponentiAggiuntivi = 0;
 $PagineEventiGiornalieri = 0;
+$PagineInformazioniAggiuntive = 0;
 
 //prendo il numero di comunicazioni salvate sul database con tag comunicazione
 require ("infoAccess.php");
@@ -50,6 +52,17 @@ while($row = $result->fetch_assoc()){
 //prendo la quantità di row
 $NumeroEventiGiornalieri = count($eventi_giornalieri);
 
+//vedo se nella tabella dei moltiplicatori se le informazioni aggiuntive sono sopra a 0
+$stmt = $db->prepare("SELECT * FROM moltiplicatoriprogrammazione WHERE MoltNumeroInformazioniAggiuntive > 0");
+$stmt->execute();
+$result = $stmt->get_result();
+$informazioni_aggiuntive = [];
+while($row = $result->fetch_assoc()){
+    $informazioni_aggiuntive[] = $row;
+}
+//prendo la quantità di row
+$NumeroInformazioniAggiuntive = count($informazioni_aggiuntive);
+
 //prendo tutta la tabella moltiplicatoriprogrammazione
 $stmt = $db->prepare("SELECT * FROM moltiplicatoriprogrammazione");
 $stmt->execute();
@@ -89,38 +102,50 @@ for ($i = 0; $i < $NumeroProgrammazione; $i++){
 $MinutiTotaliComunicazioni = [];
 $MinutiTotaliComponentiAggiuntivi = [];
 $MinutiTotaliEventiGiornalieri = [];
+$MinutiTotaliInformazioniAggiuntive = [];
 
-//Si considera che ogni pagina dura un minuto e le somme dei minuti totali per ogni pagina devono essere minori o uguali a TempoTotale
-for($i = 0; $i < $NumeroProgrammazione; $i++){
-    //calcolo i minuti totali per le comunicazioni
-    $MinutiTotaliComunicazioni[$i] = $MinutiTotali[$i]/3 * $programmazione[$i]['MoltComunicazioni'];
-    //considero solo il numero intero
-    $MinutiTotaliComunicazioni[$i] = floor($MinutiTotaliComunicazioni[$i]);
-    $MinutiTotali[$i]= $MinutiTotali[$i] - $MinutiTotaliComunicazioni[$i];
-    //calcolo i minuti totali per i componenti aggiuntivi
-    $MinutiTotaliComponentiAggiuntivi[$i] = $MinutiTotali[$i]/2 * $programmazione[$i]['MoltComponentiAggiuntivi'];
-    //considero solo il numero intero
-    $MinutiTotaliComponentiAggiuntivi[$i] = floor($MinutiTotaliComponentiAggiuntivi[$i]);
-    $MinutiTotali[$i]= $MinutiTotali[$i] - $MinutiTotaliComponentiAggiuntivi[$i];
-    //calcolo i minuti totali per gli eventi giornalieri
-    $MinutiTotaliEventiGiornalieri[$i] = $MinutiTotali[$i] * $programmazione[$i]['MoltEventiGiornalieri'];
-    //considero solo il numero intero
-    $MinutiTotaliEventiGiornalieri[$i] = floor($MinutiTotaliEventiGiornalieri[$i]);
-    if ($NumeroComponentiAggiuntivi === 0){
-        $MinutiTotaliComunicazioni[$i] = $MinutiTotaliComunicazioni[$i] + $MinutiTotaliComponentiAggiuntivi[$i];
+for ($i = 0; $i < $NumeroProgrammazione; $i++) {
+    // Calcolo i minuti totali per ciascuna categoria
+    $MinutiTotaliComunicazioni[$i] = floor($MinutiTotali[$i] / 4 * $programmazione[$i]['MoltComunicazioni']);
+    $MinutiTotali[$i] -= $MinutiTotaliComunicazioni[$i];
+    
+    $MinutiTotaliComponentiAggiuntivi[$i] = floor($MinutiTotali[$i] / 3 * $programmazione[$i]['MoltComponentiAggiuntivi']);
+    $MinutiTotali[$i] -= $MinutiTotaliComponentiAggiuntivi[$i];
+    
+    $MinutiTotaliEventiGiornalieri[$i] = floor($MinutiTotali[$i] / 2 * $programmazione[$i]['MoltEventiGiornalieri']);
+    $MinutiTotali[$i] -= $MinutiTotaliEventiGiornalieri[$i];
+    
+    $MinutiTotaliInformazioniAggiuntive[$i] = floor($MinutiTotali[$i] * $programmazione[$i]['MoltNumeroInformazioniAggiuntive']);
+    
+    // Se una categoria è a 0, assegno i minuti rimanenti a Informazioni Aggiuntive
+    if ($NumeroComponentiAggiuntivi === 0 && $NumeroEventiGiornalieri === 0 && $NumeroComunicazioni === 0) {
+        $MinutiTotaliInformazioniAggiuntive[$i] = $MinutiTotali[$i];
+        $MinutiTotaliComunicazioni[$i] = 0;
         $MinutiTotaliComponentiAggiuntivi[$i] = 0;
-    }
-    if ($NumeroEventiGiornalieri === 0){
-        $MinutiTotaliComunicazioni[$i] = $MinutiTotaliComunicazioni[$i] + $MinutiTotaliEventiGiornalieri[$i];
         $MinutiTotaliEventiGiornalieri[$i] = 0;
+    } else {
+        if ($NumeroComponentiAggiuntivi === 0) {
+            $MinutiTotaliInformazioniAggiuntive[$i] += $MinutiTotaliComponentiAggiuntivi[$i];
+            $MinutiTotaliComponentiAggiuntivi[$i] = 0;
+        }
+        if ($NumeroEventiGiornalieri === 0) {
+            $MinutiTotaliInformazioniAggiuntive[$i] += $MinutiTotaliEventiGiornalieri[$i];
+            $MinutiTotaliEventiGiornalieri[$i] = 0;
+        }
+        if ($NumeroComunicazioni === 0) {
+            $MinutiTotaliInformazioniAggiuntive[$i] += $MinutiTotaliComunicazioni[$i];
+            $MinutiTotaliComunicazioni[$i] = 0;
+        }
     }
+    
 }
+
 
 //carico i dati in proggrammazione svuotando la tabella e ricreando tutte le righe
 $stmt = $db->prepare("TRUNCATE TABLE programmazione");
 $stmt->execute();
 for($i = 0; $i < $NumeroProgrammazione; $i++){
-    $stmt = $db->prepare("INSERT INTO programmazione (Ora_Inizio, Ora_Fine, Numero_Comunicazioni, Numero_Componenti_Aggiuntivi, Numero_Eventi_Giornalieri) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssiii", $programmazione[$i]['Ora_Inizio'], $programmazione[$i]['Ora_Fine'], $MinutiTotaliComunicazioni[$i], $MinutiTotaliComponentiAggiuntivi[$i], $MinutiTotaliEventiGiornalieri[$i]);
+    $stmt = $db->prepare("INSERT INTO programmazione (Ora_Inizio, Ora_Fine, Numero_Comunicazioni, Numero_Componenti_Aggiuntivi, Numero_Eventi_Giornalieri, Numero_Informazioni_Generali) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssiiii", $programmazione[$i]['Ora_Inizio'], $programmazione[$i]['Ora_Fine'], $MinutiTotaliComunicazioni[$i], $MinutiTotaliComponentiAggiuntivi[$i], $MinutiTotaliEventiGiornalieri[$i], $MinutiTotaliInformazioniAggiuntive[$i]);
     $stmt->execute();
 }
