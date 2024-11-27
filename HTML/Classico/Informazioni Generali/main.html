@@ -1,14 +1,15 @@
 <div id="InfoBiblioteca">
     <div id="titoloBiblioteca">BIBLIOTECA</div>
     <div id="immagineBiblioteca"><img src="IMG/Immagini Sito/Classico/Biblioteca.jpg" alt="?"></div>
-    <div id="orariBiblioteca"></div>
-    <div id="statoBiblioteca" class=""></div>
+    <div id="orariBiblioteca">Mercoledi - mercoledi <br>10:00 - 12:00</div>
+    <div id="statoBiblioteca" class="">-- ORA CHIUSA--</div>
 </div>
 <div id="InfoSegreteria">
     <div id="titoloSegreteria">SEGRETERIA</div>
     <div id="immagineSegreteria"><img src="IMG/Immagini Sito/Classico/segreteria.png" alt="?"></div>
-    <div id="orariSegreteria"></div>
-    <div id="statoSegreteria" class=""></div>
+    <div id="orariSegreteria">08:10 - 09:10 <br>
+        11:45 - 13:10</div>
+    <div id="statoSegreteria" class="">--ORA APERTA--</div>
 </div>
 <div id="InfoListaMerende">
     <div id="titoloListaMerende">LISTA MERENDE</div>
@@ -20,32 +21,554 @@
             <td class=""></td>
         </tr>
         <tr>
-            <td class="prodotto">. Prosciutto cotto + formaggio</td>
+            <td class="prodotto">. PROSCIUTTO COTTO + FORMAGGIO</td>
             <td class="prezzo">€ 2,00</td>
         </tr>
         <!--fine esempio-->
     </table>
-    <div id="orarioPaninaro"></div>
+    <div id="orarioPaninaro">dalle 9:10 alle 10:10</div>
 </div>
 <div id="InfoMeteo">
     <div id="titoloMeteo">METEO</div>
     <div id="immagineMeteo"><img src="" alt="?"></div>
     <div id="imgTemperaturaMeteo"><img src="IMG/Immagini Sito/Classico/temperatura.png" alt="?"></div>
-    <div id="temperaturaMeteo"></div>
+    <div id="temperaturaMeteo">23°C</div>
     <div id="imgVentoMeteo"><img src="IMG/Immagini Sito/Classico/vento.png" alt="?"></div>
-    <div id="ventoMeteo"></div>
+    <div id="ventoMeteo">10 Km/h</div>
     <div id="imgUmiditaMeteo"><img src="IMG/Immagini Sito/Classico/umidita.png" alt="?"></div>
-    <div id="umiditaMeteo"></div>
+    <div id="umiditaMeteo">99%</div>
 </div>
 <div id="InfoPsicologo">
     <div id="titoloPsicologo">PSICOLOGO</div>
     <div id="immaginePsicologo"><img src="IMG/Immagini Sito/Classico/psicologo.png" alt="?"></div>
     <div id="orarioPsicologoITI">
-        <div id="giornoPsicologoITI"></div>
-        <div id="doveOrarioPsicologoITI"></div>
+        <div id="giornoPsicologoITI">LUN</div>
+        <div id="doveOrarioPsicologoITI">Aula 4, sede ITI <br>
+            08:10 - 09:10</div>
     </div>
     <div id="orarioPsicologoIPSIA">
-        <div id="giornoPsicologoIPSIA"></div>
-        <div id="doveOrarioPsicologoIPSIA"></div>
+        <div id="giornoPsicologoIPSIA">GIO</div>
+        <div id="doveOrarioPsicologoIPSIA">Segreteria IPSIA <br>
+            8:10 - 12:10</div>
     </div>
 </div>
+<style>
+    .apero {
+        color: #14FF00;
+    }
+
+    .chiuso {
+        color: #D80000;
+    }
+
+    #main {
+        background-color: #00152D;
+    }
+
+    #InfoBiblioteca {
+        width: 520px;
+        height: 300.172px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #0E284B;
+        position: absolute;
+        top: 26px;
+        left: 41px;
+    }
+
+    #InfoSegreteria {
+        width: 520px;
+        height: 351px;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #0E284B;
+        flex-shrink: 0;
+        position: absolute;
+        top: 369px;
+        left: 41px;
+    }
+
+    #InfoListaMerende {
+        width: 650px;
+        height: 696px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #004083;
+        position: absolute;
+        top: 26px;
+        left: 635px;
+    }
+
+    #InfoMeteo {
+        width: 520px;
+        height: 287.377px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #0E284B;
+        position: absolute;
+        top: 26px;
+        left: 1359px;
+    }
+
+    #InfoPsicologo {
+        width: 520px;
+        height: 373px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #0E284B;
+        position: absolute;
+        top: 346px;
+        left: 1359px;
+    }
+
+    #titoloBiblioteca {
+        display: flex;
+        width: 516px;
+        height: 49.894px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #7CB342;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 21px;
+    }
+
+    #immagineBiblioteca {
+        width: 133px;
+        height: 130px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 88px;
+        left: 11px;
+    }
+
+    #orariBiblioteca {
+        display: flex;
+        width: 372px;
+        height: 124px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 350;
+        line-height: normal;
+        position: absolute;
+        top: 89px;
+        left: 144px;
+    }
+
+    #statoBiblioteca {
+        display: flex;
+        width: 487px;
+        height: 91px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        position: absolute;
+        top: 209px;
+        left: 17px;
+    }
+
+    #titoloSegreteria {
+        display: flex;
+        width: 516px;
+        height: 49.894px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #F57C00;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 21px;
+    }
+
+    #immagineSegreteria {
+        width: 133px;
+        height: 130px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 112px;
+        left: 342px;
+    }
+
+    #orariSegreteria {
+        display: flex;
+        width: 372px;
+        height: 124px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 112px;
+        left: 2px;
+    }
+
+    #statoSegreteria {
+        display: flex;
+        width: 487px;
+        height: 91px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        position: absolute;
+        top: 262px;
+        left: 17px;
+    }
+
+    #titoloListaMerende {
+        display: flex;
+        width: 550px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #F44336;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 42px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 21px;
+        left: 110px;
+    }
+
+    #immagineListaMerende {
+        width: 96px;
+        height: 96px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 1px;
+        left: 34px;
+    }
+
+    #listaMerende {
+        width: 90%;
+        position: absolute;
+        top: 100px;
+        left: 40px;
+    }
+
+    #listaMerende tr td {
+        color: #FFF;
+        font-family: Outfit;
+        font-style: normal;
+    }
+
+    .categoria {
+        font-weight: 900;
+        font-size: 26px;
+        color: #F44336;
+        font-weight: 500;
+    }
+
+    .prodotto {
+        font-weight: 400;
+        font-size: 21px;
+        color: #FFF;
+        padding-right: 20px;
+    }
+
+    .prezzo {
+        font-weight: 400;
+        font-size: 21px;
+        color: #FFF;
+        text-align: right;
+    }
+
+    #listaMerende tr td:nth-child(1) {
+        width: 80%;
+        border-right: #fff 1px solid;
+    }
+
+    #listaMerende tr td {
+        padding: 0px;
+    }
+
+    #listaMerende tr td:nth-child(2) {
+        width: 20%;
+    }
+
+    #orarioPaninaro {
+        width: 340px;
+        height: 50px;
+        color: #FFAC00;
+        font-family: Outfit;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 622px;
+        left: 149px;
+    }
+
+    #titoloMeteo {
+        display: flex;
+        width: 516px;
+        height: 48px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #DDEC14;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 19px;
+    }
+
+    #immagineMeteo {
+        width: 200px;
+        height: 200px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 73px;
+        left: 38px;
+    }
+
+    #imgTemperaturaMeteo {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 76px;
+        left: 246px;
+    }
+
+    #imgVentoMeteo {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 143px;
+        left: 246px;
+    }
+
+    #imgUmiditaMeteo {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 216px;
+        left: 246px;
+    }
+
+    #temperaturaMeteo {
+        display: flex;
+        width: 200px;
+        height: 60px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        font-family: Outfit;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 76px;
+        left: 314px;
+    }
+
+    #ventoMeteo {
+        display: flex;
+        width: 200px;
+        height: 60px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        font-family: Outfit;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 143px;
+        left: 314px;
+    }
+
+    #umiditaMeteo {
+        display: flex;
+        width: 200px;
+        height: 60px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        font-family: Outfit;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 216px;
+        left: 314px;
+    }
+
+    #titoloPsicologo {
+        display: flex;
+        width: 516px;
+        height: 49.894px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #FB4BD8;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 21px;
+    }
+
+    #immaginePsicologo {
+        width: 133px;
+        height: 130px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 133px;
+        left: 384px;
+    }
+
+    #orarioPsicologoITI {
+        border-radius: 11px;
+        border: 4px solid rgba(251, 75, 216, 0.56);
+        background: rgba(217, 217, 217, 0.00);
+        width: 357px;
+        height: 99px;
+        position: absolute;
+        top: 94px;
+        left: 32px;
+    }
+
+    #orarioPsicologoIPSIA {
+        border-radius: 11px;
+        border: 4px solid rgba(251, 75, 216, 0.56);
+        background: rgba(217, 217, 217, 0.00);
+        width: 357px;
+        height: 99px;
+        position: absolute;
+        top: 206px;
+        left: 32px;
+    }
+
+    #giornoPsicologoITI {
+        display: flex;
+        width: 112px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #E4E4E4;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+    }
+
+    #doveOrarioPsicologoITI {
+        display: flex;
+        width: 246px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #FFF;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+        left: 112px;
+    }
+
+    #giornoPsicologoIPSIA {
+        display: flex;
+        width: 112px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #E4E4E4;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+    }
+
+    #doveOrarioPsicologoIPSIA {
+        display: flex;
+        width: 246px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #FFF;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+        left: 112px;
+    }
+</style>
