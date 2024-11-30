@@ -44,6 +44,7 @@ function startInfoGen() {
             });
 
             startStati();
+            startPaninaro();
         })
         .catch(error => {
             console.error('Errore nella richiesta degli orari:', error);
@@ -132,6 +133,44 @@ function convertiGiorno(giorno) {
         case "Domenica": return 7;
         default: return 0;
     }
+}
+
+function startPaninaro() {
+    fetch('PHP/getters.php?action=getPaninaro')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.length === 0) {
+                console.error("Nessun dato ricevuto.");
+                return;
+            }
+
+            //per ogni riga presente in data viene creato un elemento nella tabella listaMerende
+            data.forEach(riga => {
+                let rigaMenu = document.createElement('tr');
+                let colonnaTesto = document.createElement('td');
+                let colonnaPrezzo = document.createElement('td');
+                
+                if(riga["tipo"]=="categoria"){
+                    colonnaTesto.className = "categoria";
+                    //tutto in maiuscolo
+                    colonnaTesto.innerHTML = riga["nome"].toUpperCase();
+                }else if(riga["tipo"]=="prodotto"){
+                    colonnaTesto.className = "prodotto";
+                    //tutto in maiuscolo
+                    colonnaTesto.innerHTML = ". "+riga["nome"].toUpperCase();
+                    colonnaPrezzo.className = "prezzo";
+                    colonnaPrezzo.innerHTML = "€ "+riga["prezzo"];
+                }
+
+                rigaMenu.appendChild(colonnaTesto);
+                rigaMenu.appendChild(colonnaPrezzo);
+                document.getElementById('listaMerende').appendChild(rigaMenu);  
+            });
+        })
+        .catch(error => {
+            console.error('Errore nella richiesta del paninaro:', error);
+        });
 }
 
 startInfoGen();

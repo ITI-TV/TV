@@ -123,15 +123,18 @@ function getPeriodoFestivo() {
     if (
         (dataCorrente >= dataInizioNatale && dataCorrente <= dataFineNatale) // Periodo di Natale
     ) {
-        return 'Natalizia';
+        //return 'Natalizia';
+        return 'Classico';
     } else if (
         (dataCorrente >= new Date(anno, mesePasqua, giornoPasqua - 5) && dataCorrente <= new Date(anno, mesePasqua, giornoPasqua + 6)) // Periodo di Pasqua: inizia 5 giorni prima della Pasqua
     ) {
-        return 'Pasqua';
+        //return 'Pasqua';
+        return 'Classico';
     } else if (
         (dataCorrente >= new Date(anno, 9, 20) && dataCorrente <= new Date(anno, 10, 2)) // Periodo di Halloween: dal 20 ottobre al 2 novembre
     ) {
-        return 'Halloween';
+        //return 'Halloween';
+        return 'Classico';
     } else {
         return 'Classico'; // Se non è un periodo festivo, carica il periodo Classico
     }

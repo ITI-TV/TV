@@ -203,6 +203,24 @@ function getMeteo() {
     echo json_encode($meteo);
 }
 
+function getPaninaro(){
+    $conn = connectDatabase();
+    $sql = "SELECT * FROM paninaro";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $rows = array();
+    while ($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+
+    $stmt->close();
+    $conn->close();
+    header('Content-Type: application/json');
+    echo json_encode($rows);
+}
+
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'getEmergenze') {
         getEmergenze();
@@ -228,6 +246,9 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'getMeteo'){
         require ('GestoreNumeroPagine.php');
         getMeteo();
+    } elseif ($_GET['action'] == 'getPaninaro'){
+        require ('GestoreNumeroPagine.php');
+        getPaninaro();
     } else {
         echo json_encode(array("error" => "Azione non valida"));
     }

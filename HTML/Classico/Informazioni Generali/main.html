@@ -2,29 +2,18 @@
     <div id="titoloBiblioteca">BIBLIOTECA</div>
     <div id="immagineBiblioteca"><img src="IMG/Immagini Sito/Classico/Biblioteca.jpg" alt="?"></div>
     <div id="orariBiblioteca"></div>
-    <div id="statoBiblioteca" class="">-- ORA CHIUSA--</div>
+    <div id="statoBiblioteca" class=""></div>
 </div>
 <div id="InfoSegreteria">
     <div id="titoloSegreteria">SEGRETERIA</div>
     <div id="immagineSegreteria"><img src="IMG/Immagini Sito/Classico/segreteria.png" alt="?"></div>
     <div id="orariSegreteria"></div>
-    <div id="statoSegreteria" class="">--ORA APERTA--</div>
+    <div id="statoSegreteria" class=""></div>
 </div>
 <div id="InfoListaMerende">
     <div id="titoloListaMerende">LISTA MERENDE</div>
     <div id="immagineListaMerende"><img src="IMG/Immagini Sito/Classico/merende.png" alt="?"></div>
-    <table id="listaMerende">
-        <!--esempio-->
-        <tr>
-            <td class="categoria">PINZONI FARCITI</td>
-            <td class=""></td>
-        </tr>
-        <tr>
-            <td class="prodotto">. PROSCIUTTO COTTO + FORMAGGIO</td>
-            <td class="prezzo">€ 2,00</td>
-        </tr>
-        <!--fine esempio-->
-    </table>
+    <table id="listaMerende"></table>
     <div id="orarioPaninaro"></div>
 </div>
 <div id="InfoMeteo">
@@ -48,6 +37,8 @@
         <div id="giornoPsicologoIPSIA"></div>
         <div id="doveOrarioPsicologoIPSIA"></div>
     </div>
+    <img src="IMG/Immagini Sito/Classico/mail.png" alt="?" id="mailPsicologo">
+    <div id="e-mailPsicologo">puntodivista@iticopernico.it</div>
 </div>
 <script src="JS/Informazioni Generali/main.js"></script>
 <style>
@@ -77,13 +68,13 @@
 
     #InfoSegreteria {
         width: 520px;
-        height: 351px;
+        height: 373px;
         border-radius: 15px;
         border: 2.5px solid #FFF;
         background: #0E284B;
         flex-shrink: 0;
         position: absolute;
-        top: 369px;
+        top: 350px;
         left: 41px;
     }
 
@@ -101,7 +92,7 @@
 
     #InfoMeteo {
         width: 520px;
-        height: 287.377px;
+        height: 300.172px;
         flex-shrink: 0;
         border-radius: 15px;
         border: 2.5px solid #FFF;
@@ -119,7 +110,7 @@
         border: 2.5px solid #FFF;
         background: #0E284B;
         position: absolute;
-        top: 346px;
+        top: 350px;
         left: 1359px;
     }
 
@@ -568,5 +559,30 @@
         position: absolute;
         top: 13px;
         left: 112px;
+    }
+
+    #mailPsicologo {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 321px;
+        left: 32px;
+    }
+
+    #e-mailPsicologo {
+        display: flex;
+        width: 411px;
+        color: #FFF;
+        text-align: center;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: Outfit;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 320px;
+        left: 80px;
     }
 </style>
