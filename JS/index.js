@@ -7,7 +7,7 @@ console.log('Benvenuto nella TV del progetto ITI-TV dell`IIS "N.Copernico A.Carp
 
 // Variabili per il controllo dello stato del server
 //prendo il link dinamicamente in base all'url presnete sulla barra del browser
-const serverUrl = window.location.origin + '/TV/index.html';
+const serverUrl = window.location.origin + '/index.html';
 let isOffline = false;
 
 // Funzione che parte al caricamento del sito e controlla con la funzione lo stato del server ogni 2 secondi
@@ -123,8 +123,8 @@ function getPeriodoFestivo() {
     if (
         (dataCorrente >= dataInizioNatale && dataCorrente <= dataFineNatale) // Periodo di Natale
     ) {
-        //return 'Natalizia';
-        return 'Classico';
+        return 'Natalizia';
+        //return 'Classico';
     } else if (
         (dataCorrente >= new Date(anno, mesePasqua, giornoPasqua - 5) && dataCorrente <= new Date(anno, mesePasqua, giornoPasqua + 6)) // Periodo di Pasqua: inizia 5 giorni prima della Pasqua
     ) {
@@ -160,7 +160,7 @@ function setHeaderNat() {
     document.getElementById('logoITI').style.display = 'none';
     document.getElementById('logoITITV').style.display = 'block';
     //sostiusco l'img LogoITITV con una nuova immagine
-    document.getElementById('logoITITV').src = '/IMG/Immagini Sito/Natale/LogoITITVNat.png';
+    document.getElementById('logoITITV').src = 'IMG/Immagini Sito/Natale/LogoITITVNat.png';
     //sposto TestoTitolo a lefdt 44px
     document.getElementById('TestoTitolo').style.left = '44px';
     //imposto font famili 'Recursive', sans-serif
@@ -168,7 +168,7 @@ function setHeaderNat() {
     //creo una img
     let IMGStellaCadente = document.createElement('img');
     //gli do l'src dell'immagine
-    IMGStellaCadente.src = '/IMG/Immagini Sito/Natale/Stellacadente.png';
+    IMGStellaCadente.src = 'IMG/Immagini Sito/Natale/Stellacadente.png';
     //gli do un top di 70px e un left di 1386px position absolute
     IMGStellaCadente.style.position = 'absolute';
     IMGStellaCadente.style.top = '10px';
@@ -182,7 +182,7 @@ function setFooterNat() {
     //creo una immagine
     let IMGBabboNatale = document.createElement('img');
     //gli do l'src dell'immagine
-    IMGBabboNatale.src = '/IMG/Immagini Sito/Natale/BabboNalate.png';
+    IMGBabboNatale.src = 'IMG/Immagini Sito/Natale/BabboNalate.png';
     //gli do un top di 0px e un left di 0px position absolute
     IMGBabboNatale.style.position = 'absolute';
     IMGBabboNatale.style.top = '0px';
@@ -257,7 +257,7 @@ function setHeaderHalloween() {
     //creo una img
     let IMGStellaCadente = document.createElement('img');
     //gli do l'src dell'immagine
-    IMGStellaCadente.src = '/IMG/Immagini Sito/Halloween/Luna.png';
+    IMGStellaCadente.src = 'IMG/Immagini Sito/Halloween/Luna.png';
     //gli do un top di 70px e un left di 1386px position absolute
     IMGStellaCadente.style.position = 'absolute';
     IMGStellaCadente.style.top = '3px';
@@ -272,7 +272,7 @@ function setFooterHalloween() {
     //creo una immagine
     let IMGBabboNatale = document.createElement('img');
     //gli do l'src dell'immagine
-    IMGBabboNatale.src = '/IMG/Immagini Sito/Halloween/Nighmare.png';
+    IMGBabboNatale.src = 'IMG/Immagini Sito/Halloween/Nighmare.png';
     //gli do un top di 0px e un left di 0px position absolute
     IMGBabboNatale.style.position = 'absolute';
     IMGBabboNatale.style.top = '0px';

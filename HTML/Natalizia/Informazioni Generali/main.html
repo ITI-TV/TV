@@ -1,0 +1,648 @@
+<div id="InfoBiblioteca">
+    <div id="titoloBiblioteca">BIBLIOTECA</div>
+    <div id="immagineBiblioteca"><img src="IMG/Immagini Sito/Classico/Biblioteca.jpg" alt="?"></div>
+    <div id="orariBiblioteca"></div>
+    <div id="statoBiblioteca" class=""></div>
+</div>
+<div id="InfoSegreteria">
+    <div id="titoloSegreteria">SEGRETERIA</div>
+    <div id="immagineSegreteria"><img src="IMG/Immagini Sito/Classico/segreteria.png" alt="?"></div>
+    <div id="orariSegreteria"></div>
+    <div id="statoSegreteria" class=""></div>
+</div>
+<div id="InfoListaMerende">
+    <div id="titoloListaMerende">LISTA MERENDE</div>
+    <div id="immagineListaMerende"><img src="IMG/Immagini Sito/Natale/merende.png" alt="?"></div>
+    <table id="listaMerende"></table>
+    <div id="orarioPaninaro"></div>
+</div>
+<div id="InfoMeteo">
+    <div id="titoloMeteo">METEO</div>
+    <img src="" alt="?" id="immagineMeteo">
+    <div id="imgTemperaturaMeteo"><img src="IMG/Immagini Sito/Classico/temperatura.png" alt="?"></div>
+    <div id="temperaturaMeteo"></div>
+    <div id="imgVentoMeteo"><img src="IMG/Immagini Sito/Classico/vento.png" alt="?"></div>
+    <div id="ventoMeteo"></div>
+    <div id="imgUmiditaMeteo"><img src="IMG/Immagini Sito/Classico/umidita.png" alt="?"></div>
+    <div id="umiditaMeteo"></div>
+</div>
+<div id="InfoPsicologo">
+    <div id="titoloPsicologo">PSICOLOGO</div>
+    <div id="immaginePsicologo"><img src="IMG/Immagini Sito/Classico/psicologo.png" alt="?"></div>
+    <div id="orarioPsicologoITI">
+        <div id="giornoPsicologoITI"></div>
+        <div id="doveOrarioPsicologoITI"></div>
+    </div>
+    <div id="orarioPsicologoIPSIA">
+        <div id="giornoPsicologoIPSIA"></div>
+        <div id="doveOrarioPsicologoIPSIA"></div>
+    </div>
+    <img src="IMG/Immagini Sito/Classico/mail.png" alt="?" id="mailPsicologo">
+    <div id="e-mailPsicologo">puntodivista@iticopernico.it</div>
+</div>
+<img src="IMG/Immagini Sito/Natale/Omino.png" alt="" id="img1">
+<img src="IMG/Immagini Sito/Natale/BastoneZucchero.png" alt="" id="img2">
+<img src="IMG/Immagini Sito/Natale/PallaNeve.png" alt="" id="img3">
+<img src="IMG/Immagini Sito/Natale/stella.png" alt="" id="img4">
+<img src="IMG/Immagini Sito/Natale/cappello.png" alt="" id="img5">
+<img src="IMG/Immagini Sito/Natale/pupazzoneve.png" alt="" id="img6">
+<script src="JS/Informazioni Generali/main.js"></script>
+<style>
+    #img1 {
+        width: 200.15px;
+        height: 171.632px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 590px;
+        left: 1170px;
+    }
+
+    #img2 {
+        width: 95;
+        height: 130px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 221px;
+        left: 503px;
+    }
+
+    #img3 {
+        width: 115px;
+        height: 120px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 624px;
+        left: 596px;
+    }
+
+    #img4 {
+        width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 624px;
+        left: 510px;
+    }
+
+    #img5 {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 427px;
+        left: 1790px;
+    }
+
+    #img6 {
+        width: 67px;
+        height: 90px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 240px;
+        left: 1830px;
+    }
+
+    #main {
+        background-color: #222;
+    }
+
+    .aperto {
+        color: #14FF00;
+    }
+
+    .chiuso {
+        color: #D80000;
+    }
+
+    #InfoBiblioteca {
+        width: 520px;
+        height: 300.172px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #1F403A;
+        position: absolute;
+        top: 26px;
+        left: 41px;
+    }
+
+    #InfoSegreteria {
+        width: 520px;
+        height: 373px;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #1F403A;
+        flex-shrink: 0;
+        position: absolute;
+        top: 350px;
+        left: 41px;
+    }
+
+    #InfoListaMerende {
+        width: 650px;
+        height: 696px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #1F403A;
+        position: absolute;
+        top: 26px;
+        left: 635px;
+    }
+
+    #InfoMeteo {
+        width: 520px;
+        height: 300.172px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #1F403A;
+        position: absolute;
+        top: 26px;
+        left: 1359px;
+    }
+
+    #InfoPsicologo {
+        width: 520px;
+        height: 373px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #1F403A;
+        position: absolute;
+        top: 350px;
+        left: 1359px;
+    }
+
+    #titoloBiblioteca {
+        display: flex;
+        width: 516px;
+        height: 49.894px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #64B5F6;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 21px;
+    }
+
+    #immagineBiblioteca {
+        width: 133px;
+        height: 130px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 88px;
+        left: 11px;
+    }
+
+    #orariBiblioteca {
+        display: flex;
+        width: 372px;
+        height: 124px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 350;
+        line-height: normal;
+        position: absolute;
+        top: 89px;
+        left: 144px;
+    }
+
+    #statoBiblioteca {
+        display: flex;
+        width: 487px;
+        height: 91px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        position: absolute;
+        top: 209px;
+        left: 17px;
+    }
+
+    #titoloSegreteria {
+        display: flex;
+        width: 516px;
+        height: 49.894px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #F57C00;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 21px;
+    }
+
+    #immagineSegreteria {
+        width: 133px;
+        height: 130px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 112px;
+        left: 342px;
+    }
+
+    #orariSegreteria {
+        display: flex;
+        width: 372px;
+        height: 124px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 112px;
+        left: 2px;
+    }
+
+    #statoSegreteria {
+        display: flex;
+        width: 487px;
+        height: 91px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        position: absolute;
+        top: 262px;
+        left: 17px;
+    }
+
+    #titoloListaMerende {
+        display: flex;
+        width: 550px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #CC776E;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 42px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 21px;
+        left: 110px;
+    }
+
+    #immagineListaMerende {
+        width: 96px;
+        height: 96px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 1px;
+        left: 34px;
+    }
+
+    #listaMerende {
+        width: 90%;
+        position: absolute;
+        top: 100px;
+        left: 40px;
+    }
+
+    #listaMerende tr td {
+        color: #FFF;
+        font-family: Outfit;
+        font-style: normal;
+    }
+
+    .categoria {
+        font-weight: 900;
+        font-size: 26px;
+        color: #F44336;
+        font-weight: 500;
+    }
+
+    .prodotto {
+        font-weight: 400;
+        font-size: 21px;
+        color: #FFF;
+        padding-right: 20px;
+    }
+
+    .prezzo {
+        font-weight: 400;
+        font-size: 21px;
+        color: #FFF;
+        text-align: right;
+    }
+
+    #listaMerende tr td:nth-child(1) {
+        width: 80%;
+        border-right: #fff 1px solid;
+    }
+
+    #listaMerende tr td {
+        padding: 0px;
+    }
+
+    #listaMerende tr td:nth-child(2) {
+        width: 20%;
+    }
+
+    #orarioPaninaro {
+        width: 340px;
+        height: 50px;
+        color: #FFAC00;
+        font-family: Outfit;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 622px;
+        left: 149px;
+    }
+
+    #titoloMeteo {
+        display: flex;
+        width: 516px;
+        height: 48px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #DDEC14;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 19px;
+    }
+
+    #immagineMeteo {
+        width: 200px;
+        height: 200px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 73px;
+        left: 38px;
+    }
+
+    #imgTemperaturaMeteo {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 76px;
+        left: 246px;
+    }
+
+    #imgVentoMeteo {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 143px;
+        left: 246px;
+    }
+
+    #imgUmiditaMeteo {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 216px;
+        left: 246px;
+    }
+
+    #temperaturaMeteo {
+        display: flex;
+        width: 200px;
+        height: 60px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        font-family: Outfit;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 76px;
+        left: 314px;
+    }
+
+    #ventoMeteo {
+        display: flex;
+        width: 200px;
+        height: 60px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        font-family: Outfit;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 143px;
+        left: 314px;
+    }
+
+    #umiditaMeteo {
+        display: flex;
+        width: 200px;
+        height: 60px;
+        flex-direction: column;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #FFF;
+        font-family: Outfit;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 216px;
+        left: 314px;
+    }
+
+    #titoloPsicologo {
+        display: flex;
+        width: 516px;
+        height: 49.894px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #FB4BD8;
+        text-align: center;
+        font-family: "Rubik One";
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        position: absolute;
+        top: 21px;
+    }
+
+    #immaginePsicologo {
+        width: 133px;
+        height: 130px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 133px;
+        left: 384px;
+    }
+
+    #orarioPsicologoITI {
+        border-radius: 11px;
+        border: 4px solid rgba(251, 75, 216, 0.56);
+        background: rgba(217, 217, 217, 0.00);
+        width: 357px;
+        height: 99px;
+        position: absolute;
+        top: 94px;
+        left: 32px;
+    }
+
+    #orarioPsicologoIPSIA {
+        border-radius: 11px;
+        border: 4px solid rgba(251, 75, 216, 0.56);
+        background: rgba(217, 217, 217, 0.00);
+        width: 357px;
+        height: 99px;
+        position: absolute;
+        top: 206px;
+        left: 32px;
+    }
+
+    #giornoPsicologoITI {
+        display: flex;
+        width: 112px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #E4E4E4;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+    }
+
+    #doveOrarioPsicologoITI {
+        display: flex;
+        width: 246px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #FFF;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+        left: 112px;
+    }
+
+    #giornoPsicologoIPSIA {
+        display: flex;
+        width: 112px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #E4E4E4;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+    }
+
+    #doveOrarioPsicologoIPSIA {
+        display: flex;
+        width: 246px;
+        height: 74px;
+        flex-direction: column;
+        justify-content: center;
+        color: #FFF;
+        text-align: center;
+        font-family: "Outfit";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        top: 13px;
+        left: 112px;
+    }
+
+    #mailPsicologo {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 321px;
+        left: 32px;
+    }
+
+    #e-mailPsicologo {
+        display: flex;
+        width: 411px;
+        color: #FFF;
+        text-align: center;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: Outfit;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 320px;
+        left: 80px;
+    }
+</style>
