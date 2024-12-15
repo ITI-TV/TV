@@ -1,4 +1,10 @@
 <?php
+
+//avvio sessione
+session_start();
+
+$APIopenWeather = "c45a48658f5924fddcf7a98580dd5abf";
+
 function connectDatabase() {
     require ('infoAccess.php');
 
@@ -144,6 +150,77 @@ function getProgrammazione(){
     echo json_encode($rows);
 }
 
+function getOrari(){
+    $conn = connectDatabase();
+    $sql = "SELECT * FROM orari";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $rows = array();
+    while ($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+
+    $stmt->close();
+    $conn->close();
+    header('Content-Type: application/json');
+    echo json_encode($rows);
+}
+
+function getMeteo() {
+    //controllo se i dati in sessione salvati sono di più di 10 minuti fa
+    if (!isset($_SESSION['meteo']) || time() - $_SESSION['meteo']['timestamp'] >= 600) {
+        //prendo le informazioni meteo della città di ferrara tramite API openWeather sono in modalità giorno
+        $url = "http://api.openweathermap.org/data/2.5/weather?q=Ferrara,it&units=metric&appid=$GLOBALS[APIopenWeather]";
+        $response = @file_get_contents($url);
+        
+        if ($response !== false) {
+            $data = json_decode($response, true);
+            
+            $meteo = array(
+                "temperatura" => $data['main']['temp'],
+                "umidita" => $data['main']['humidity'],
+                "vento" => $data['wind']['speed'],
+                "icona" => $data['weather'][0]['icon']
+            );
+            
+            //salva i dati meteo in una variabile di sessione
+            $_SESSION['meteo'] = $meteo;
+            $_SESSION['meteo']['timestamp'] = time();
+        } else {
+            // Se non riesco a contattare l'API, uso i dati della sessione anche se vecchi
+            if (isset($_SESSION['meteo'])) {
+                $meteo = $_SESSION['meteo'];
+            } else {
+                $meteo = array("error" => "Impossibile ottenere i dati meteo e nessun dato precedente disponibile.");
+            }
+        }
+    } else {
+        $meteo = $_SESSION['meteo'];
+    }
+    header('Content-Type: application/json');
+    echo json_encode($meteo);
+}
+
+function getPaninaro(){
+    $conn = connectDatabase();
+    $sql = "SELECT * FROM paninaro";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $rows = array();
+    while ($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+
+    $stmt->close();
+    $conn->close();
+    header('Content-Type: application/json');
+    echo json_encode($rows);
+}
+
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'getEmergenze') {
         getEmergenze();
@@ -163,6 +240,15 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'getProgrammazione') {
         require ('GestoreNumeroPagine.php');
         getProgrammazione();
+    } elseif ($_GET['action'] == 'getOrari'){
+        require ('GestoreNumeroPagine.php');
+        getOrari();
+    } elseif ($_GET['action'] == 'getMeteo'){
+        require ('GestoreNumeroPagine.php');
+        getMeteo();
+    } elseif ($_GET['action'] == 'getPaninaro'){
+        require ('GestoreNumeroPagine.php');
+        getPaninaro();
     } else {
         echo json_encode(array("error" => "Azione non valida"));
     }
