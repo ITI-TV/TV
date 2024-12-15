@@ -2,59 +2,116 @@
     <div id="boxImmagineEventiGiornalieri">
         <img src="#" alt="Nessuna immagine disponibile" id="ImmagineEventiGiornalieri">
     </div>
-    <div id="TitoloEventiGiornalieri"></div>
+    <div id="boxHeaderEventiGiornalieri">
+        <div id="giornoAttualeEventiGiornalieri"></div>
+        <div id="TitoloEventiGiornalieri"></div>
+    </div>
     <div id="TestoEventiGiornalieri"></div>
-    <script src="JS/Eventi%20Giornalieri/main.js">startEventiGiornalieri()</script>
+    <img src="IMG/Immagini Sito/Natale/PallaNeve.png" alt="" id="img1">
+    <img src="IMG/Immagini Sito/Natale/PUPAZZODINEVE.png" alt="" id="img2">
+    <script src="JS/Eventi%20Giornalieri/main.js"></script>
+    <script>startEventiGiornalieri()</script>
 </div>
 
 <style>
-    #boxEventiGiornalieri {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
+    #main {
+        background: #222;
     }
 
-    #boxImmagineEventiGiornalieri {
-        width: 20%;
-        height: 90%;
-        border: 1px solid #000;
-        background-color: #f1f1f1;
+    #boxEventiGiornalieri {
+        width: 1798px;
+        height: 660px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 2.5px solid #FFF;
+        background: #B20B0B;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 37px;
+        left: 61px;
+    }
+
+    #boxHeaderEventiGiornalieri {
+        width: 1798px;
+        height: 90px;
+        flex-shrink: 0;
+        background-color: #1f403a;
+        border: 2px solid #FFF;
+        position: absolute;
+        top: -1px;
+        left: -1px;
+    }
+
+    #giornoAttualeEventiGiornalieri {
+        width: 522px;
+        color: #FFF;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+        position: absolute;
+        top: 15px;
+        left: 27px;
     }
 
     #TitoloEventiGiornalieri {
-        width: 70%;
-        height: 10%;
-        border: 1px solid #000;
-        background-color: #f1f1f1;
+        color: #FFF;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
         position: absolute;
-        top: 0;
-        left: 25%;
+        top: 15px;
+        left: 30%;
+    }
+
+    #boxImmagineEventiGiornalieri {
+        width: 870px;
+        height: 496px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 1px solid #E09819;
+        background: #1F403A;
+        position: absolute;
+        top: 123px;
+        left: 28px;
     }
 
     #TestoEventiGiornalieri {
-        width: 70%;
-        height: 80%;
-        border: 1px solid #000;
-        background-color: #f1f1f1;
+        display: flex;
+        width: 836px;
+        height: 520px;
+        flex-direction: column;
+        flex-shrink: 0;
+        justify-content: center;
+        color: #FFF;
+        font-family: Outfit;
+        font-size: 35px;
+        font-style: normal;
+        line-height: normal;
         position: absolute;
-        top: 10%;
-        left: 25%;
+        top: 105px;
+        left: 933px;
     }
 
-    #ImmagineEventiGiornalieri {
-        width: 100%;
-        object-fit: cover;
-        object-position: center;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
+    #img1 {
+        width: 160px;
+        height: 160px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 531px;
+        left: 750px;
+    }
+
+    #img2 {
+        width: 175px;
+        height: 195px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 531px;
+        left: 1690px;
     }
 </style>
