@@ -14,7 +14,7 @@ console.log('Ringraziamenti per il supporto e la collaborazione per gli eventi g
 
 // Variabili per il controllo dello stato del server
 //prendo il link dinamicamente in base all'url presnete sulla barra del browser
-const serverUrl = window.location.origin + '/TVITITV/index.html';
+const serverUrl = window.location.origin + '/index.html';
 let isOffline = false;
 
 // Funzione che parte al caricamento del sito e controlla con la funzione lo stato del server ogni 2 secondi
@@ -488,86 +488,6 @@ function loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAg
         } else {
             starter();
         }
-        /*
-        //calcolo il tempo rimanente in secondi
-        let data = new Date();
-        let ora = data.getHours();
-        let minuti = data.getMinutes();
-        let secondi = data.getSeconds();
-        let oraCorrente = ora * 3600 + minuti * 60 + secondi;
-        let oraInizioSplit = oraInizio.split(':');
-        let oraInizioSecondi = oraInizioSplit[0] * 3600 + oraInizioSplit[1] * 60;
-        let oraFineSplit = oraFine.split(':');
-        let oraFineSecondi = oraFineSplit[0] * 3600 + oraFineSplit[1] * 60;
-        if (oraFineSecondi < oraInizioSecondi) {
-            oraFineSecondi += 86400;
-        }
-        let TempoRimanente = oraFineSecondi - oraCorrente;
-        //controllo che non sia passato il tempo totale disponibile
-        if (TempoRimanente > 0) {
-            console.log('Tempo rimanente: ' + TempoRimanente);
-            console.log('Tempo disponibile per ogni pagina: ' + TempoDisponibilePerOgniPagina);
-            console.log('Pagina corrente: ' + currentIndex);
-            console.log('Programmazione: ' + programmazione);
-            console.log('Numero Comunicazioni: ' + NumeroComunicazioni);
-            console.log('Numero Eventi Giornalieri: ' + NumeroEventiGiornalieri);
-            console.log('Numero Componenti Aggiuntivi: ' + NumeroComponentiAggiuntivi);
-            if (NumeroComponentiAggiuntivi === "0" && NumeroComunicazioni === "0" && NumeroEventiGiornalieri === "0" || NumeroComunicazioni === 0 && NumeroEventiGiornalieri === 0 && NumeroComponentiAggiuntivi === 0) {
-                // Mostra una schermata nera
-                $('#main').css('display', 'none');
-                $('#footer').css('display', 'none');
-                $('#header').css('display', 'none');
-                $('body').css('background-color', 'black');
-
-                setTimeout(() => {
-                    checkServer();
-                    location.reload();
-                }, TempoRimanente * 1000);
-
-
-            } else {
-                console.log(periodo);
-                if (periodo === 'Natalizia') {
-                    setHeaderNat();
-                    setFooterNat();
-                } else if (periodo === 'Pasqua') {
-                    setHeaderPasqua();
-                    setFooterPasqua();
-                } else if (periodo === 'Halloween') {
-                    setHeaderHalloween();
-                    setFooterHalloween();
-                }
-                let pagina = programmazione[currentIndex];
-                if (pagina === 'C') {
-                    checkServer()
-                    TestoTitolo.innerHTML = 'COMUNICAZIONI GIORNALIERE';
-                    loadComunicazioni(periodo);
-                } else if (pagina === 'E') {
-                    checkServer()
-                    TestoTitolo.innerHTML = 'RICORRENZA DEL GIORNO';
-                    loadEventiGiornalieri(periodo);
-                } else if (pagina === 'A') {
-                    checkServer()
-                    TestoTitolo.innerHTML = 'COMPONENTI AGGIUNTIVI';
-                    loadComponentiAggiuntivi(periodo);
-                }
-                currentIndex++;
-                setTimeout(processNext, TempoDisponibilePerOgniPagina * 1000);
-            }
-        } else if (oraCorrente < oraInizioSecondi) {
-            $('#main').css('display', 'none');
-            $('#footer').css('display', 'none');
-            $('#header').css('display', 'none');
-            $('body').css('background-color', 'black');
-
-            setTimeout(() => {
-                checkServer();
-                location.reload();
-            }, TempoRimanente * 1000);
-        } else {
-            starter();
-        }
-            */
     }
     processNext();
 }

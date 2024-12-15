@@ -53,7 +53,7 @@ function load(data) {
 }
 
 function startComunicazioniNat() {
-    document.body.style.backgroundColor = "#E64B3B";
+    document.body.style.backgroundColor = "#222";
     checkServer();
     fetch('PHP/getters.php?action=getComunicazioni')
         .then(response => {
