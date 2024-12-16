@@ -7,7 +7,7 @@ console.log('Benvenuto nella TV del progetto ITI-TV dell`IIS "N.Copernico A.Carp
 
 // Variabili per il controllo dello stato del server
 //prendo il link dinamicamente in base all'url presnete sulla barra del browser
-const serverUrl = window.location.origin + '/index.html';
+const serverUrl = window.location.origin + '/TV/index.html';
 let isOffline = false;
 
 // Funzione che parte al caricamento del sito e controlla con la funzione lo stato del server ogni 2 secondi
@@ -490,7 +490,7 @@ function loader(NumeroComunicazioni, NumeroEventiGiornalieri, NumeroComponentiAg
     let TempoDisponibilePerOgniPagina = Math.floor(TempoTotaleDisponibile / (NumeroComunicazioni + NumeroEventiGiornalieri + NumeroComponentiAggiuntivi + NumeroInformazioniGenerali));
 
     // indice corrente che dice, in base alla programmazione, quale pagina devo caricare recuperando il punto in cui dovrebbe essere caricata in base all'orario
-    let currentIndex = Math.floor(getOrario().split(':')[0] * 3600 + getOrario().split(':')[1] * 60) / TempoDisponibilePerOgniPagina;
+    let currentIndex = Math.floor(Math.floor(getOrario().split(':')[0] * 3600 + getOrario().split(':')[1] * 60) / TempoDisponibilePerOgniPagina / 60);
 
     let oraCorrente = 0;
 
