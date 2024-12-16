@@ -7,7 +7,7 @@ console.log('Benvenuto nella TV del progetto ITI-TV dell`IIS "N.Copernico A.Carp
 
 // Variabili per il controllo dello stato del server
 //prendo il link dinamicamente in base all'url presnete sulla barra del browser
-const serverUrl = window.location.origin + '/TV/index.html';
+const serverUrl = window.location.origin + '/index.html';
 let isOffline = false;
 
 // Funzione che parte al caricamento del sito e controlla con la funzione lo stato del server ogni 2 secondi
