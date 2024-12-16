@@ -1,5 +1,5 @@
 <?php
-$serverConn="DB";
+$serverConn="db";
 $usernameConn="ititv";
 $passwordConn="ititv";
 $dbnameConn="ititv";
